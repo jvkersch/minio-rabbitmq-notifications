@@ -1,5 +1,13 @@
 version: "3"
 services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./rabbitmq/definitions.json:/opt/definitions.json:ro
+      - ./rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
   minio:
     image: minio/minio
     ports:
@@ -14,11 +22,7 @@ services:
     command: minio --config-dir / server /data
     depends_on:
       - rabbitmq
-  rabbitmq:
-    image: rabbitmq:3-management
+  flask:
+    build: flask
     ports:
-      - "5672:5672"
-      - "15672:15672"
-    volumes:
-      - ./rabbitmq/definitions.json:/opt/definitions.json:ro
-      - ./rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
+      - "5000:5000"

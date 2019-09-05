@@ -57,7 +57,7 @@
       "vhost": "/",
       "destination": "bucket-notifications",
       "destination_type": "queue",
-      "routing_key": "",
+      "routing_key": "bucket-notifications",
       "arguments": {}
     }
   ]
