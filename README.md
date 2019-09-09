@@ -21,8 +21,16 @@ mc mb bucket
 mc event add  myminio/bucket arn:minio:sqs::1:amqp
 ```
 
-Restart Minio
+Limitations
+-----------
+
+After deploying the stack with Docker compose, you must restart the minio
+service by
 ```
 mc admin service restart myminio
 ```
 
+To use the upload.py and download.py utilities, the ``minio`` host must resolve
+to localhost. To achieve this, add the line ``127.0.0.1 minio`` to your
+``/etc/hosts/`` file. This will be avoided in a future version by running the
+tools inside a container that has access to the Docker DNS.
